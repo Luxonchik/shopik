@@ -6,6 +6,7 @@ import TestPage from "./pages/TestPage";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 import SignUpPage from "./pages/SignUpPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   const { checkAuth, authUser, isCheckingAuth } = useAuthStore();
@@ -31,10 +32,12 @@ function App() {
           path="/signup"
           element={!authUser ? <SignUpPage /> : <Navigate to={"/"} />}
         />
-        {/* <Route
+        <Route
           path="/admin"
-          element={!authUser.role === "ADMIN" ? <AdminPage /> : <Navigate to={"/"} />}
-        /> */}
+          element={
+            authUser?.role === "ADMIN" ? <AdminPage /> : <Navigate to={"/"} />
+          }
+        />
       </Routes>
       <Toaster />
     </div>
